@@ -1,0 +1,107 @@
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <string>
+using namespace std;
+
+//========== HUFFMAN TREE NODE ==========
+
+struct Node {
+    char ch;
+    int freq;
+
+    Node *left, *right;
+
+    Node(char c, int f) {
+        ch = c;
+        freq = f;
+        left = right = nullptr;
+    }
+};
+
+//========== MIN HEAP COMPARATOR ==========
+
+struct Compare {
+    bool operator()(Node* a, Node* b) {
+        return a->freq > b->freq;
+    }
+};
+
+//========== PRINT HUFFMAN CODES ==========
+
+void printCodes(Node* root, string code) {
+    if (root == nullptr)
+        return;
+
+    if (root->left == nullptr &&
+        root->right == nullptr) {
+        cout << root->ch << ": "
+             << (code.empty() ? "0" : code) << endl;
+        return;
+    }
+
+    printCodes(root->left, code + "0");
+    printCodes(root->right, code + "1");
+}
+
+//========== DELETE HUFFMAN TREE ==========
+
+void deleteTree(Node* root) {
+    if (root == nullptr)
+        return;
+
+    deleteTree(root->left);
+    deleteTree(root->right);
+
+    delete root;
+}
+
+//========== HUFFMAN CODING ALGORITHM ==========
+
+void huffmanCoding(char chars[], int freq[], int n) {
+    priority_queue<Node*, vector<Node*>, Compare> pq;
+
+    // Insert all characters into min heap
+
+    for (int i = 0; i < n; i++)
+        pq.push(new Node(chars[i], freq[i]));
+
+    // Construct Huffman tree
+
+    while (pq.size() > 1) {
+        Node* left = pq.top();
+        pq.pop();
+
+        Node* right = pq.top();
+        pq.pop();
+
+        Node* parent = new Node(
+            '$', left->freq + right->freq
+        );
+
+        parent->left = left;
+        parent->right = right;
+
+        pq.push(parent);
+    }
+
+    if (!pq.empty()) {
+        printCodes(pq.top(), "");
+        deleteTree(pq.top());
+    }
+}
+
+//========== MAIN FUNCTION ==========
+
+int main() {
+    char chars[] = {'a', 'b', 'c', 'd', 'e', 'f'};
+    int freq[] = {5, 9, 12, 13, 16, 45};
+
+    int n = sizeof(chars) / sizeof(chars[0]);
+
+    cout << "Huffman Codes:\n";
+
+    huffmanCoding(chars, freq, n);
+
+    return 0;
+}

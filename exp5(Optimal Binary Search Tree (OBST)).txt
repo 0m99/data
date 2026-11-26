@@ -1,0 +1,69 @@
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+//========== OPTIMAL BINARY SEARCH TREE ==========
+
+int optimalBST(int keys[], int freq[], int n) {
+    if (n == 0)
+        return 0;
+
+    vector<vector<int>> cost(n, vector<int>(n, 0));
+
+    // Cost of a single node
+
+    for (int i = 0; i < n; i++)
+        cost[i][i] = freq[i];
+
+    // Consider different subtree lengths
+
+    for (int len = 2; len <= n; len++) {
+        for (int i = 0; i <= n - len; i++) {
+            int j = i + len - 1;
+
+            cost[i][j] = INT_MAX;
+
+            // Calculate sum of frequencies
+
+            int sum = 0;
+
+            for (int k = i; k <= j; k++)
+                sum += freq[k];
+
+            // Consider every key as root
+
+            for (int r = i; r <= j; r++) {
+                int left = 0;
+                int right = 0;
+
+                if (r > i)
+                    left = cost[i][r - 1];
+
+                if (r < j)
+                    right = cost[r + 1][j];
+
+                int total = left + right + sum;
+
+                if (total < cost[i][j])
+                    cost[i][j] = total;
+            }
+        }
+    }
+
+    return cost[0][n - 1];
+}
+
+//========== MAIN FUNCTION ==========
+
+int main() {
+    int keys[] = {10, 12, 20};
+    int freq[] = {34, 8, 50};
+
+    int n = sizeof(keys) / sizeof(keys[0]);
+
+    cout << "Minimum cost of OBST: "
+         << optimalBST(keys, freq, n);
+
+    return 0;
+}

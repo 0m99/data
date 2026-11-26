@@ -1,0 +1,624 @@
+============================================================
+EXPERIMENT 1: SORTING ALGORITHMS
+============================================================
+
+------------------------- THEORY ---------------------------
+
+1.1 SELECTION SORT
+
+Selection Sort is a comparison-based sorting algorithm that
+repeatedly finds the smallest element from the unsorted
+portion of an array and places it at its correct position.
+
+It divides the array into sorted and unsorted portions.
+It is an in-place sorting algorithm that requires constant
+auxiliary space but is inefficient for large datasets.
+
+
+1.2 INSERTION SORT
+
+Insertion Sort is a comparison-based sorting algorithm that
+builds a sorted array by inserting each element into its
+appropriate position in the sorted portion.
+
+The algorithm shifts larger elements towards the right to
+make space for the current element. It is stable, in-place
+and efficient for small or nearly sorted datasets.
+
+
+1.3 BUBBLE SORT
+
+Bubble Sort is a simple sorting algorithm that repeatedly
+compares adjacent elements and swaps them if they are in
+the wrong order.
+
+After each pass, the largest remaining element reaches its
+correct position. The optimized algorithm terminates early
+if no swaps occur during a complete pass.
+
+
+1.4 MERGE SORT
+
+Merge Sort is based on the divide-and-conquer technique.
+It recursively divides an array into two halves until
+each subarray contains only one element.
+
+The sorted subarrays are then merged to form a completely
+sorted array. Merge Sort is stable and provides consistent
+O(n log n) performance but requires additional memory.
+
+
+1.5 QUICK SORT
+
+Quick Sort is a divide-and-conquer sorting algorithm that
+selects an element as a pivot and partitions the array
+around that pivot.
+
+Elements smaller than or equal to the pivot are placed on
+its left, while larger elements are placed on its right.
+The process is recursively applied to both partitions.
+
+
+------------------------ ALGORITHM -------------------------
+
+1.1 SELECTION SORT
+
+1. Start.
+2. Initialize an array of n elements.
+3. Iterate from i = 0 to n-2.
+4. Set minIndex = i.
+5. Traverse the remaining unsorted elements.
+6. If arr[j] < arr[minIndex], set minIndex = j.
+7. Swap arr[i] with arr[minIndex].
+8. Repeat until the entire array is sorted.
+9. Display the sorted array.
+10. Stop.
+
+
+1.2 INSERTION SORT
+
+1. Start.
+2. Initialize an array of n elements.
+3. Iterate from i = 1 to n-1.
+4. Store arr[i] in key and set j = i-1.
+5. While j >= 0 and arr[j] > key:
+   a. Set arr[j+1] = arr[j].
+   b. Decrement j.
+6. Insert key at arr[j+1].
+7. Repeat until all elements are processed.
+8. Display the sorted array.
+9. Stop.
+
+
+1.3 BUBBLE SORT
+
+1. Start.
+2. Initialize an array of n elements.
+3. Iterate from i = 0 to n-2.
+4. Initialize swapped = false.
+5. Iterate from j = 0 to n-i-2.
+6. If arr[j] > arr[j+1]:
+   a. Swap both elements.
+   b. Set swapped = true.
+7. If swapped is false, terminate the outer loop.
+8. Display the sorted array.
+9. Stop.
+
+
+1.4 MERGE SORT
+
+1. Start.
+2. Initialize an array of n elements.
+3. Set low = 0 and high = n-1.
+4. If low < high:
+   a. Calculate mid = low + (high-low)/2.
+   b. Recursively sort the left half.
+   c. Recursively sort the right half.
+   d. Merge both sorted halves.
+5. During merging, compare elements of both halves and
+   insert the smaller element into a temporary array.
+6. Copy any remaining elements into the temporary array.
+7. Copy the merged elements back into the original array.
+8. Display the sorted array.
+9. Stop.
+
+
+1.5 QUICK SORT
+
+1. Start.
+2. Initialize an array of n elements.
+3. Set low = 0 and high = n-1.
+4. If low < high:
+   a. Select arr[high] as the pivot.
+   b. Initialize i = low-1.
+   c. Traverse from j = low to high-1.
+   d. If arr[j] <= pivot, increment i and swap
+      arr[i] with arr[j].
+   e. Swap arr[i+1] with arr[high].
+   f. Set partition index p = i+1.
+   g. Recursively sort the left partition.
+   h. Recursively sort the right partition.
+5. Display the sorted array.
+6. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Algorithm       Best          Average       Worst
+------------------------------------------------------------
+Selection Sort  O(n²)         O(n²)         O(n²)
+Insertion Sort  O(n)          O(n²)         O(n²)
+Bubble Sort     O(n)          O(n²)         O(n²)
+Merge Sort      O(n log n)    O(n log n)    O(n log n)
+Quick Sort      O(n log n)    O(n log n)    O(n²)
+
+AUXILIARY SPACE COMPLEXITY:
+
+Selection Sort : O(1)
+Insertion Sort : O(1)
+Bubble Sort    : O(1)
+Merge Sort     : O(n)
+Quick Sort     : O(log n) average, O(n) worst
+
+
+============================================================
+EXPERIMENT 2: SEARCHING ALGORITHMS
+============================================================
+
+------------------------- THEORY ---------------------------
+
+2.1 LINEAR SEARCH
+
+Linear Search is a searching algorithm that sequentially
+checks every element of an array until the desired element
+is found or the end of the array is reached.
+
+It works on both sorted and unsorted arrays. Although it
+is simple to implement, its execution time increases
+linearly with the number of elements in the worst case.
+
+
+2.2 BINARY SEARCH
+
+Binary Search is an efficient searching algorithm that
+repeatedly divides a sorted array into two halves to
+locate a given element.
+
+The search key is compared with the middle element, and
+one half of the search space is eliminated in each
+iteration. It requires the input array to be sorted.
+
+
+------------------------ ALGORITHM -------------------------
+
+2.1 LINEAR SEARCH
+
+1. Start.
+2. Initialize an array of n elements and a search key.
+3. Traverse the array from index 0 to n-1.
+4. Compare each element with the search key.
+5. If arr[i] equals the key, return its index.
+6. If no match is found, return -1.
+7. Display the search result.
+8. Stop.
+
+
+2.2 BINARY SEARCH
+
+1. Start.
+2. Initialize a sorted array and a search key.
+3. Set low = 0 and high = n-1.
+4. While low <= high:
+   a. Calculate mid = low + (high-low)/2.
+   b. If arr[mid] equals the key, return mid.
+   c. If arr[mid] < key, set low = mid+1.
+   d. Otherwise, set high = mid-1.
+5. If the element is not found, return -1.
+6. Display the search result.
+7. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Algorithm       Best       Average       Worst
+------------------------------------------------------------
+Linear Search   O(1)       O(n)          O(n)
+Binary Search   O(1)       O(log n)      O(log n)
+
+AUXILIARY SPACE COMPLEXITY:
+
+Linear Search : O(1)
+Binary Search : O(1)
+
+
+============================================================
+EXPERIMENT 3: STRASSEN'S MATRIX MULTIPLICATION
+============================================================
+
+------------------------- THEORY ---------------------------
+
+Strassen's Matrix Multiplication is a divide-and-conquer
+algorithm used to multiply two square matrices. Unlike
+conventional recursive matrix multiplication, it uses
+seven recursive multiplications instead of eight.
+
+The algorithm divides each matrix into four submatrices
+and performs addition, subtraction and multiplication
+operations to obtain the resultant matrix. This reduces
+the time complexity of matrix multiplication.
+
+
+------------------------ ALGORITHM -------------------------
+
+1. Start.
+2. Initialize two square matrices A and B of size n x n,
+   where n is a power of 2.
+3. If n = 1, multiply the individual elements and return.
+4. Divide A and B into four equal submatrices:
+   A11, A12, A21, A22 and B11, B12, B21, B22.
+5. Recursively calculate seven products:
+
+   M1 = (A11 + A22) x (B11 + B22)
+   M2 = (A21 + A22) x B11
+   M3 = A11 x (B12 - B22)
+   M4 = A22 x (B21 - B11)
+   M5 = (A11 + A12) x B22
+   M6 = (A21 - A11) x (B11 + B12)
+   M7 = (A12 - A22) x (B21 + B22)
+
+6. Calculate the resultant submatrices:
+
+   C11 = M1 + M4 - M5 + M7
+   C12 = M3 + M5
+   C21 = M2 + M4
+   C22 = M1 - M2 + M3 + M6
+
+7. Combine the four submatrices to obtain matrix C.
+8. Display the resultant matrix.
+9. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Time Complexity  : O(n^2.807)
+Space Complexity : O(n²)
+
+Recurrence Relation:
+
+T(n) = 7T(n/2) + O(n²)
+
+
+============================================================
+EXPERIMENT 4: LONGEST COMMON SUBSEQUENCE (LCS)
+============================================================
+
+------------------------- THEORY ---------------------------
+
+The Longest Common Subsequence problem determines the
+longest sequence of characters that appears in two given
+strings in the same relative order. The characters need
+not occupy consecutive positions.
+
+The problem is solved using dynamic programming by storing
+solutions of smaller subproblems in a two-dimensional
+table. The subsequence is obtained by backtracking
+through the completed table.
+
+
+------------------------ ALGORITHM -------------------------
+
+1. Start.
+2. Initialize two strings X and Y of lengths m and n.
+3. Create a DP table of size (m+1) x (n+1).
+4. Initialize the first row and column with zero.
+5. For i = 1 to m and j = 1 to n:
+   a. If X[i-1] equals Y[j-1], then:
+
+      dp[i][j] = 1 + dp[i-1][j-1]
+
+   b. Otherwise:
+
+      dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+6. The value dp[m][n] gives the length of the LCS.
+7. Backtrack from dp[m][n] while i > 0 and j > 0:
+   a. If characters match, add the character to the
+      result and move diagonally.
+   b. Otherwise, move towards the larger adjacent value
+      above or to the left.
+8. Reverse the obtained subsequence.
+9. Display the LCS and its length.
+10. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Time Complexity  : O(m x n)
+Space Complexity : O(m x n)
+
+
+============================================================
+EXPERIMENT 5: OPTIMAL BINARY SEARCH TREE (OBST)
+============================================================
+
+------------------------- THEORY ---------------------------
+
+An Optimal Binary Search Tree is a binary search tree
+constructed using sorted keys and their search frequencies
+such that the total weighted search cost is minimized.
+
+Dynamic programming is used to evaluate different possible
+root nodes and determine the minimum cost of each subtree.
+Frequently accessed keys are generally placed closer to
+the root to reduce the overall search cost.
+
+
+------------------------ ALGORITHM -------------------------
+
+1. Start.
+2. Initialize n sorted keys and their search frequencies.
+3. Create a cost table of size n x n.
+4. Initialize cost[i][i] = freq[i] for every key.
+5. Consider subtree lengths from 2 to n.
+6. For each possible subtree from index i to j:
+   a. Initialize cost[i][j] to infinity.
+   b. Calculate the sum of frequencies from i to j.
+   c. Consider every key r from i to j as the root.
+   d. Calculate the cost of the left subtree.
+   e. Calculate the cost of the right subtree.
+      The cost of an empty subtree is zero.
+   f. Calculate the total cost as:
+
+      Total = Left Cost + Right Cost + Frequency Sum
+
+   g. Update cost[i][j] with the minimum total cost.
+7. The value cost[0][n-1] gives the minimum search cost.
+8. Display the minimum cost.
+9. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Time Complexity  : O(n³)
+Space Complexity : O(n²)
+
+Note: This implementation considers successful searches.
+
+
+============================================================
+EXPERIMENT 6: HUFFMAN CODING
+============================================================
+
+------------------------- THEORY ---------------------------
+
+Huffman Coding is a lossless data compression algorithm
+based on the greedy approach. It assigns shorter binary
+codes to frequently occurring characters and longer codes
+to less frequently occurring characters.
+
+A binary tree called the Huffman Tree is constructed using
+a minimum priority queue. Binary codes are generated by
+assigning 0 to left edges and 1 to right edges. The
+resulting codes are prefix-free.
+
+
+------------------------ ALGORITHM -------------------------
+
+1. Start.
+2. Initialize characters and their frequencies.
+3. Create a leaf node for each character.
+4. Insert all nodes into a minimum priority queue.
+5. While the priority queue contains more than one node:
+   a. Remove the two nodes with minimum frequencies.
+   b. Create a new internal node whose frequency is
+      the sum of both nodes.
+   c. Assign the first node as the left child.
+   d. Assign the second node as the right child.
+   e. Insert the new node into the priority queue.
+6. The remaining node becomes the root of the tree.
+7. Traverse the Huffman Tree recursively.
+8. Assign 0 to left edges and 1 to right edges.
+9. Display the binary code of each character.
+10. Release the allocated tree memory.
+11. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Tree Construction : O(n log n)
+Tree and Heap Space Complexity : O(n)
+
+Code generation and printing additionally depend on
+the total length of the generated codes.
+
+
+============================================================
+EXPERIMENT 7: ACTIVITY SELECTION PROBLEM
+============================================================
+
+------------------------- THEORY ---------------------------
+
+The Activity Selection problem aims to select the maximum
+number of non-overlapping activities from a given set of
+activities having specified starting and finishing times.
+
+The problem is solved using a greedy approach by selecting
+the activity with the earliest finishing time. This leaves
+the maximum available time for selecting subsequent
+compatible activities.
+
+
+------------------------ ALGORITHM -------------------------
+
+1. Start.
+2. Initialize activities with start and finish times.
+3. If no activities exist, return.
+4. Sort all activities in ascending order of finish time.
+5. Select the first activity.
+6. Store its finishing time in lastFinish.
+7. Initialize count = 1.
+8. Traverse the remaining activities:
+   a. If the current activity's start time is greater
+      than or equal to lastFinish:
+      - Select the current activity.
+      - Update lastFinish with its finishing time.
+      - Increment count.
+9. Display all selected activities.
+10. Display the maximum number of activities.
+11. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Sorting            : O(n log n)
+Activity Selection : O(n)
+Overall Complexity : O(n log n)
+Already Sorted     : O(n)
+
+
+============================================================
+EXPERIMENT 8: STRING MATCHING ALGORITHMS
+============================================================
+
+------------------------- THEORY ---------------------------
+
+8.1 NAIVE STRING MATCHING
+
+Naive String Matching is a brute-force algorithm used to
+find all occurrences of a given pattern in a text. It
+compares the pattern with the text at every possible
+starting position.
+
+If a mismatch occurs, the pattern is shifted by one
+position and the comparison is repeated. It does not
+require preprocessing but can perform many redundant
+character comparisons.
+
+
+8.2 RABIN-KARP ALGORITHM
+
+Rabin-Karp is a string-matching algorithm that uses hashing
+to find occurrences of a pattern within a given text.
+It compares the hash value of the pattern with the hash
+value of each equal-sized text window.
+
+A rolling hash is used to calculate the hash of the next
+window efficiently. When two hash values match, individual
+characters are compared to verify the match and avoid
+incorrect results caused by hash collisions.
+
+
+8.3 KNUTH-MORRIS-PRATT (KMP) ALGORITHM
+
+The Knuth-Morris-Pratt algorithm is an efficient string-
+matching algorithm that avoids unnecessary character
+comparisons by utilizing information obtained from
+previously matched characters.
+
+It preprocesses the pattern to construct an LPS array,
+which stores the length of the longest proper prefix
+that is also a suffix for each pattern prefix. During a
+mismatch, this array determines where matching resumes.
+
+
+------------------------ ALGORITHM -------------------------
+
+8.1 NAIVE STRING MATCHING
+
+1. Start.
+2. Initialize text T of length n and pattern P of length m.
+3. If m = 0 or m > n, return.
+4. Iterate from i = 0 to n-m.
+5. Initialize j = 0.
+6. Compare T[i+j] with P[j] while j < m.
+7. If the characters match, increment j and continue.
+8. If a mismatch occurs, move to the next starting position.
+9. If j = m, display i as the matching index.
+10. Repeat until all possible positions are checked.
+11. Stop.
+
+
+8.2 RABIN-KARP ALGORITHM
+
+1. Start.
+2. Initialize text T and pattern P of lengths n and m.
+3. If m = 0 or m > n, return.
+4. Choose a base d and a prime modulus q.
+5. Calculate h = d^(m-1) mod q.
+6. Calculate the hash value p of the pattern.
+7. Calculate the hash value t of the first text window.
+8. Iterate from i = 0 to n-m:
+   a. If p equals t, compare individual characters.
+   b. If all characters match, display index i.
+   c. If another window exists, calculate its hash:
+
+      t = (d x (t - T[i] x h) + T[i+m]) mod q
+
+   d. If t is negative, add q to t.
+9. Repeat until all text windows are checked.
+10. Stop.
+
+
+8.3 KNUTH-MORRIS-PRATT (KMP) ALGORITHM
+
+PART A: CONSTRUCTION OF LPS ARRAY
+
+1. Start.
+2. Initialize the pattern P of length m.
+3. If m = 0, return.
+4. Create an LPS array of size m.
+5. Set lps[0] = 0, len = 0 and i = 1.
+6. While i < m:
+   a. If P[i] equals P[len]:
+      - Increment len.
+      - Set lps[i] = len.
+      - Increment i.
+   b. Otherwise, if len is not zero:
+      - Set len = lps[len-1].
+   c. Otherwise:
+      - Set lps[i] = 0.
+      - Increment i.
+7. Return the LPS array.
+
+
+PART B: PATTERN SEARCHING
+
+1. Initialize text T of length n and pattern P of length m.
+2. If m = 0 or m > n, return.
+3. Construct the LPS array.
+4. Set i = 0 and j = 0.
+5. While i < n:
+   a. If T[i] equals P[j], increment both i and j.
+   b. If j = m:
+      - Display i-j as the matching index.
+      - Set j = lps[j-1].
+   c. Otherwise, if i < n and a mismatch occurs:
+      - If j is not zero, set j = lps[j-1].
+      - Otherwise, increment i.
+6. Repeat until the entire text is processed.
+7. Stop.
+
+
+--------------------- TIME COMPLEXITY ----------------------
+
+Algorithm       Best          Average       Worst
+------------------------------------------------------------
+Naive           O(n-m+1)      O(n)          O((n-m+1)m)
+Rabin-Karp      O(n+m)        O(n+m)        O(nm)
+KMP             O(n+m)        O(n+m)        O(n+m)
+
+Average-case bounds assume typical character distributions
+and relatively few hash verifications.
+
+AUXILIARY SPACE COMPLEXITY:
+
+Naive String Matching : O(1)
+Rabin-Karp            : O(1)
+KMP                   : O(m)
+
+Here, n is the length of the text and m is the length
+of the pattern.
+
+============================================================
+                  END OF ALL EXPERIMENTS
+============================================================

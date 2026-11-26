@@ -1,0 +1,70 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+//========== ACTIVITY STRUCTURE ==========
+
+struct Activity {
+    int start;
+    int finish;
+};
+
+//========== COMPARATOR FUNCTION ==========
+
+bool compare(Activity a, Activity b) {
+    return a.finish < b.finish;
+}
+
+//========== ACTIVITY SELECTION ALGORITHM ==========
+
+void activitySelection(Activity arr[], int n) {
+    if (n == 0)
+        return;
+
+    // Sort activities by finishing time
+
+    sort(arr, arr + n, compare);
+
+    cout << "Selected activities:\n";
+
+    // Select first activity
+
+    cout << "(" << arr[0].start << ", "
+         << arr[0].finish << ")" << endl;
+
+    int lastFinish = arr[0].finish;
+    int count = 1;
+
+    // Select remaining non-overlapping activities
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i].start >= lastFinish) {
+            cout << "(" << arr[i].start << ", "
+                 << arr[i].finish << ")" << endl;
+
+            lastFinish = arr[i].finish;
+            count++;
+        }
+    }
+
+    cout << "Maximum activities: " << count;
+}
+
+//========== MAIN FUNCTION ==========
+
+int main() {
+    Activity arr[] = {
+        {1, 2},
+        {3, 4},
+        {0, 6},
+        {5, 7},
+        {8, 9},
+        {5, 9}
+    };
+
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    activitySelection(arr, n);
+
+    return 0;
+}
